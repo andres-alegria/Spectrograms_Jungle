@@ -29,8 +29,8 @@ body {
   background: #fafafa;
 
   /* TWEAK: Target canvas size. Change these to resize the whole layout */
-  width: 1350px;
-  height: 1080px;
+  width: 675px;
+  height: 540;
   max-width: 100%;
 
   display: flex;
@@ -58,7 +58,7 @@ body {
   font-weight: 400;
 
   /* TWEAK: Title size and color */
-  font-size: 44pt;
+  font-size: 32pt;
   color: #003029;
 
   line-height: 1.1;
@@ -68,7 +68,7 @@ body {
   /* TWEAK: Subtitle font, size, and color */
   font-family: "Public Sans", sans-serif;
   font-weight: 400;
-  font-size: 31pt;
+  font-size: 16pt;
   color: #738b87;
 
   /* TWEAK: Gap between title and subtitle */
@@ -83,7 +83,7 @@ body {
   flex-shrink: 0;
 
   /* TWEAK: Space above/below the visualizer strip */
-  padding: 24px 0 12px;
+  padding: 24px 0 24px;
 }
 
 #timeline-canvas {
@@ -113,7 +113,7 @@ body {
 
   /* flex: 1 makes this section fill all remaining vertical
      space so the buttons are always centered.                 */
-  flex: 1;
+  flex: 0;
   align-items: center;
 }
 
@@ -128,10 +128,10 @@ body {
   background: #f0f0f0;
 
   /* TWEAK: Default card border color and thickness */
-  border: 2px solid #dde8e5;
+  border: 1px solid #dde8e5;
 
   /* TWEAK: Card corner rounding */
-  border-radius: 16px;
+  border-radius: 6px;
 
   cursor: pointer;
   overflow: hidden;
@@ -191,7 +191,7 @@ body {
   font-family: "Public Sans", sans-serif;
 
   /* TWEAK: Button name size — clamp scales it with viewport */
-  font-size: clamp(14pt, 1.6vw, 20pt);
+  font-size: clamp(10pt, 1.6vw, 12pt);
   font-weight: 400;
 
   /* TWEAK: Button label text color */
@@ -252,7 +252,7 @@ body {
   font-weight: 400;
 
   /* TWEAK: Source text size — clamp scales with viewport */
-  font-size: clamp(10pt, 1.1vw, 16pt);
+  font-size: clamp(10pt, 1.1vw, 10pt);
 
   /* TWEAK: Source text color */
   color: #738b87;
@@ -277,10 +277,10 @@ body {
   }
 
   /* TWEAK: Title size on small screens */
-  .title { font-size: 28pt; }
+  .title { font-size: 26pt; }
 
   /* TWEAK: Subtitle size on small screens */
-  .subtitle { font-size: 18pt; }
+  .subtitle { font-size: 16pt; }
 
   /* Stack buttons vertically on narrow screens */
   .sound-buttons {
@@ -291,5 +291,5 @@ body {
   .sound-btn { width: 100%; }
 
   /* TWEAK: Source text size on small screens */
-  .sources { font-size: 10pt; }
+  .sources { font-size: 8pt; }
 }
