@@ -1,0 +1,295 @@
+/* =============================================================
+   SOUNDS OF THE JUNGLE — style.css
+   -------------------------------------------------------------
+   All visual styling lives here. Each section is annotated
+   with comments explaining what to change and where.
+   ============================================================= */
+
+
+/* ── RESET ────────────────────────────────────────────────────
+   Removes default browser margins/padding so everything starts
+   from a clean slate. Usually no need to touch this.          */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+}
+
+
+/* ── PAGE WRAPPER ─────────────────────────────────────────────
+   Controls the overall canvas size, background color, and the
+   main vertical layout of all sections.                       */
+body {
+  /* TWEAK: Page background color */
+  background: #fafafa;
+
+  /* TWEAK: Target canvas size. Change these to resize the whole layout */
+  width: 1350px;
+  height: 1080px;
+  max-width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+
+  /* TWEAK: Overall page padding (top right bottom left) */
+  padding: 48px 60px 32px;
+
+  font-family: "Public Sans", sans-serif;
+}
+
+
+/* ── HEADER ───────────────────────────────────────────────────
+   The title + subtitle block at the top of the page.         */
+.header {
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.title {
+  /* TWEAK: Main title font — must be loaded in index.html <head> */
+  font-family: "Rowan", serif;
+  font-weight: 400;
+
+  /* TWEAK: Title size and color */
+  font-size: 44pt;
+  color: #003029;
+
+  line-height: 1.1;
+}
+
+.subtitle {
+  /* TWEAK: Subtitle font, size, and color */
+  font-family: "Public Sans", sans-serif;
+  font-weight: 400;
+  font-size: 31pt;
+  color: #738b87;
+
+  /* TWEAK: Gap between title and subtitle */
+  margin-top: 6px;
+}
+
+
+/* ── TIMELINE VISUALIZER ──────────────────────────────────────
+   The waveform canvas strip between the header and buttons.  */
+.visualizer-wrap {
+  width: 100%;
+  flex-shrink: 0;
+
+  /* TWEAK: Space above/below the visualizer strip */
+  padding: 24px 0 12px;
+}
+
+#timeline-canvas {
+  width: 100%;
+
+  /* TWEAK: Height of the visualizer bar area in pixels */
+  height: 110px;
+
+  display: block;
+
+  /* TWEAK: Rounded corners on the canvas background */
+  border-radius: 6px;
+}
+
+
+/* ── SOUND BUTTONS CONTAINER ──────────────────────────────────
+   Flex row that holds all three sound selector cards.        */
+.sound-buttons {
+  display: flex;
+
+  /* TWEAK: Gap between the three buttons.
+     clamp(min, preferred, max) — scales with viewport width  */
+  gap: clamp(12px, 2vw, 32px);
+
+  justify-content: center;
+  width: 100%;
+
+  /* flex: 1 makes this section fill all remaining vertical
+     space so the buttons are always centered.                 */
+  flex: 1;
+  align-items: center;
+}
+
+
+/* ── INDIVIDUAL SOUND BUTTON ──────────────────────────────────
+   Each card: spectrogram image on top, label row below.      */
+.sound-btn {
+  flex: 1;
+  min-width: 0;
+
+  /* TWEAK: Button card background (visible in the label area) */
+  background: #f0f0f0;
+
+  /* TWEAK: Default card border color and thickness */
+  border: 2px solid #dde8e5;
+
+  /* TWEAK: Card corner rounding */
+  border-radius: 16px;
+
+  cursor: pointer;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+
+  /* TWEAK: Hover/transition animation speed */
+  transition: all 0.25s ease;
+}
+
+/* Hover state — card lifts and border brightens */
+.sound-btn:hover {
+  /* TWEAK: Border color on hover */
+  border-color: #4a9080;
+
+  /* TWEAK: How many pixels the card lifts on hover */
+  transform: translateY(-3px);
+
+  /* TWEAK: Shadow on hover (x y blur spread color) */
+  box-shadow: 0 12px 40px rgba(0, 48, 41, 0.15);
+}
+
+/* Active (currently playing) state */
+.sound-btn.active {
+  /* TWEAK: Border color when audio is playing */
+  border-color: #003029;
+
+  /* TWEAK: Glow when playing */
+  box-shadow: 0 0 24px rgba(0, 48, 41, 0.2);
+}
+
+/* Spectrogram image inside the button */
+.sound-btn img {
+  width: 100%;
+
+  /* TWEAK: Image area height.
+     clamp(min, viewport-relative, max) keeps it proportional */
+  height: clamp(120px, 16vh, 200px);
+
+  object-fit: cover;
+  display: block;
+}
+
+
+/* ── BUTTON LABEL ROW ─────────────────────────────────────────
+   The row below the image containing the name + play icon.  */
+.btn-label {
+  /* TWEAK: Padding inside the label row (top/bottom left/right) */
+  padding: 12px 18px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.btn-name {
+  font-family: "Public Sans", sans-serif;
+
+  /* TWEAK: Button name size — clamp scales it with viewport */
+  font-size: clamp(14pt, 1.6vw, 20pt);
+  font-weight: 400;
+
+  /* TWEAK: Button label text color */
+  color: #003029;
+}
+
+
+/* ── PLAY / STOP ICON CIRCLE ──────────────────────────────────
+   The circular icon button on the right of each label row.  */
+.play-icon {
+  /* TWEAK: Icon circle size */
+  width: 40px;
+  height: 40px;
+
+  border-radius: 50%;
+
+  /* TWEAK: Icon circle background (default / idle state) */
+  background: #dde8e5;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.2s;
+}
+
+/* Icon circle when audio is actively playing */
+.sound-btn.active .play-icon {
+  /* TWEAK: Icon circle background while playing */
+  background: #003029;
+}
+
+.play-icon svg {
+  /* TWEAK: Icon (triangle/bars) size inside the circle */
+  width: 16px;
+  height: 16px;
+}
+
+/* Triangle = play, rectangles = stop — JS toggles visibility */
+.play-icon .play-triangle { fill: #003029; display: block; }
+.play-icon .stop-rect     { fill: #fafafa; display: none;  }
+.sound-btn.active .play-triangle { display: none;  }
+.sound-btn.active .stop-rect     { display: block; }
+
+
+/* ── SOURCES FOOTER ───────────────────────────────────────────
+   Attribution text at the bottom-left of the page.          */
+.footer {
+  width: 100%;
+  flex-shrink: 0;
+
+  /* TWEAK: Gap between the buttons and the footer text */
+  padding-top: 12px;
+}
+
+.sources {
+  font-family: "Public Sans", sans-serif;
+  font-weight: 400;
+
+  /* TWEAK: Source text size — clamp scales with viewport */
+  font-size: clamp(10pt, 1.1vw, 16pt);
+
+  /* TWEAK: Source text color */
+  color: #738b87;
+
+  /* TWEAK: Max width before text wraps — keeps it left-aligned */
+  max-width: 860px;
+
+  line-height: 1.5;
+}
+
+
+/* ── RESPONSIVE BREAKPOINTS ───────────────────────────────────
+   Below 900 px width the layout switches to single-column.
+   Adjust the font sizes and padding here for small screens.  */
+@media (max-width: 900px) {
+  body {
+    width: 100%;
+    height: auto;
+    min-height: 100vh;
+    padding: 28px 20px 20px;
+    overflow: auto;
+  }
+
+  /* TWEAK: Title size on small screens */
+  .title { font-size: 28pt; }
+
+  /* TWEAK: Subtitle size on small screens */
+  .subtitle { font-size: 18pt; }
+
+  /* Stack buttons vertically on narrow screens */
+  .sound-buttons {
+    flex-direction: column;
+    align-items: stretch;
+    flex: none;
+  }
+  .sound-btn { width: 100%; }
+
+  /* TWEAK: Source text size on small screens */
+  .sources { font-size: 10pt; }
+}

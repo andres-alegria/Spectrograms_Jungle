@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<!--
+  =============================================================
+  SOUNDS OF THE JUNGLE — index.html
+  -------------------------------------------------------------
+  This file defines the page structure (HTML skeleton).
+  Visual styling lives in style.css.
+  Audio + visualizer logic lives in script.js.
+  =============================================================
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- TWEAK: Browser tab title -->
+  <title>Sounds of the Jungle</title>
+
+  <!-- Google Fonts — loads Rowan (title) and Public Sans (body text)
+       TWEAK: To use different fonts, replace the href below with a
+       new Google Fonts URL, then update font-family in style.css.
+       Font reference: https://fonts.google.com                     -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Rowan:wght@400&family=Public+Sans:wght@400&display=swap"
+    rel="stylesheet"
+  >
+
+  <!-- Main stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ── HEADER ──────────────────────────────────────────────
+       Title and subtitle displayed at the top of the page.
+
+       TWEAK: Change the title text between the .title tags.
+       TWEAK: Change the subtitle text between the .subtitle tags.
+       Font sizes and colors are controlled in style.css under
+       .title and .subtitle.                                   -->
+  <div class="header">
+    <div class="title">Sounds of the jungle</div>
+    <div class="subtitle">Press play to listen</div>
+  </div>
+
+
+  <!-- ── TIMELINE VISUALIZER ─────────────────────────────────
+       The <canvas> element where the waveform timeline draws.
+       Do not add content inside this tag — it is painted by
+       JavaScript (script.js → redrawTimeline).
+
+       TWEAK: Height of the canvas strip → style.css
+              #timeline-canvas { height: … }                  -->
+  <div class="visualizer-wrap">
+    <canvas id="timeline-canvas"></canvas>
+  </div>
+
+
+  <!-- ── SOUND SELECTION BUTTONS ─────────────────────────────
+       Three cards, one per audio track. Each button needs:
+         id="btn-{key}"          — unique ID (any string)
+         data-audio="{key}"      — must match a key in the
+                                   AUDIO object in script.js
+         onclick="selectSound(this)" — do not change this
+
+       TWEAK: Reorder the buttons by swapping the <button>
+              blocks below.
+       TWEAK: Add a fourth button by copying one block,
+              giving it a new id + data-audio, adding a
+              matching entry to AUDIO in script.js, and
+              placing the image/audio files in assets/.      -->
+  <div class="sound-buttons">
+
+    <!-- ── Button 1: Chainsaw ──────────────────────────────
+         TWEAK: src → path to the spectrogram image
+         TWEAK: alt → accessible description of the image
+         TWEAK: btn-name text → label shown below the image  -->
+    <button
+      class="sound-btn"
+      id="btn-chainsaw"
+      data-audio="chainsaw"
+      onclick="selectSound(this)"
+    >
+      <img src="assets/images/chainsaw.jpg" alt="Chainsaw spectrogram">
+      <div class="btn-label">
+        <span class="btn-name">Chainsaw</span>
+        <!-- Play / Stop icon — toggled by JS via .active class.
+             Do not edit the SVG paths unless changing the icon shape. -->
+        <div class="play-icon">
+          <svg viewBox="0 0 24 24">
+            <polygon class="play-triangle" points="6,4 20,12 6,20"/>
+            <g class="stop-rect">
+              <rect x="5"  y="5" width="5" height="14"/>
+              <rect x="14" y="5" width="5" height="14"/>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </button>
+
+    <!-- ── Button 2: Gunshot ───────────────────────────────
+         TWEAK: Same attributes as Button 1 above.           -->
+    <button
+      class="sound-btn"
+      id="btn-gunshot"
+      data-audio="gunshot"
+      onclick="selectSound(this)"
+    >
+      <img src="assets/images/gunshot.jpg" alt="Gunshot spectrogram">
+      <div class="btn-label">
+        <span class="btn-name">Gunshot</span>
+        <div class="play-icon">
+          <svg viewBox="0 0 24 24">
+            <polygon class="play-triangle" points="6,4 20,12 6,20"/>
+            <g class="stop-rect">
+              <rect x="5"  y="5" width="5" height="14"/>
+              <rect x="14" y="5" width="5" height="14"/>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </button>
+
+    <!-- ── Button 3: Leopard ───────────────────────────────
+         TWEAK: Same attributes as Button 1 above.           -->
+    <button
+      class="sound-btn"
+      id="btn-jaguar"
+      data-audio="jaguar"
+      onclick="selectSound(this)"
+    >
+      <img src="assets/images/jaguar.jpg" alt="Leopard spectrogram">
+      <div class="btn-label">
+        <span class="btn-name">Leopard</span>
+        <div class="play-icon">
+          <svg viewBox="0 0 24 24">
+            <polygon class="play-triangle" points="6,4 20,12 6,20"/>
+            <g class="stop-rect">
+              <rect x="5"  y="5" width="5" height="14"/>
+              <rect x="14" y="5" width="5" height="14"/>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </button>
+
+  </div><!-- end .sound-buttons -->
+
+
+  <!-- ── SOURCES FOOTER ───────────────────────────────────────
+       Attribution text at the bottom-left of the page.
+       TWEAK: Edit the text inside .sources directly here.
+       Font size and color → style.css under .sources          -->
+  <div class="footer">
+    <div class="sources">
+      Sources: Chainsaw sound recorded in an Indonesian rainforest
+      by Junaydy Michael Angelo Ginting; AK47 gunshot recorded in
+      a Central African rainforest by Anahita Verahrami; Male
+      leopard vocalization was recorded by Rony Garcia in Guatemala.
+    </div>
+  </div>
+
+  <!-- Main script — load last so the DOM is ready -->
+  <script src="script.js"></script>
+
+</body>
+</html>
