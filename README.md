@@ -15,9 +15,9 @@ sounds-of-the-jungle/
     │   ├── gunshot.wav
     │   └── jaguar.wav
     └── images/
-        ├── chainsaw.jpg     ← Spectrogram thumbnail (button cover)
-        ├── gunshot.jpg
-        └── jaguar.jpg
+        ├── chainsaw.svg     ← Spectrogram icons (button cover)
+        ├── gunshot.svg
+        └── jaguar.svg
 ```
 
 ## How to run

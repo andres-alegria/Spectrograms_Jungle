@@ -3,9 +3,7 @@
   =============================================================
   SOUNDS OF THE JUNGLE — index.html
   -------------------------------------------------------------
-  This file defines the page structure (HTML skeleton).
-  Visual styling lives in style.css.
-  Audio + visualizer logic lives in script.js.
+  Page structure. Styling → style.css. Logic → script.js.
   =============================================================
 -->
 <html lang="en">
@@ -16,76 +14,72 @@
   <!-- TWEAK: Browser tab title -->
   <title>Listening for threats in the forest</title>
 
-  <!-- Google Fonts — loads Rowan (title) and Public Sans (body text)
-       TWEAK: To use different fonts, replace the href below with a
-       new Google Fonts URL, then update font-family in style.css.
-       Font reference: https://fonts.google.com                     -->
+  <!-- Google Fonts: Rowan (title) + Public Sans (body)
+       TWEAK: Swap font names here and in style.css to change typography.
+       Font browser: https://fonts.google.com -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link
     href="https://fonts.googleapis.com/css2?family=Rowan:wght@400&family=Public+Sans:wght@400&display=swap"
     rel="stylesheet"
   >
 
-  <!-- Main stylesheet -->
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
   <!-- ── HEADER ──────────────────────────────────────────────
-       Title and subtitle displayed at the top of the page.
-
-       TWEAK: Change the title text between the .title tags.
-       TWEAK: Change the subtitle text between the .subtitle tags.
-       Font sizes and colors are controlled in style.css under
-       .title and .subtitle.                                   -->
+       Left-aligned title/subtitle + logo icon top-right.
+       TWEAK: Change title text in the .title div below.
+       TWEAK: Change subtitle text in the .subtitle div below.
+       TWEAK: Font sizes/colors → style.css .title / .subtitle -->
   <div class="header">
-    <div class="title">Listening for threats in the forest</div>
-    <div class="subtitle">AI models can learn to identify acoustic patterns signaling environmental crimes in complex rainforest soundscapes.</div>
+
+    <div class="header-text">
+      <div class="title">Listening for threats in the forest</div>
+      <div class="subtitle">AI models can learn to identify acoustic patterns signaling environmental crimes in complex rainforest soundscapes.</div>
+    </div>
+
+    <!-- ── LOGO ICON ────────────────────────────────────────
+         Mongabay logomark, top-right of the header row.
+
+         TWEAK: Logo display size → style.css  .logo-icon
+                Look for the block labelled "LOGO ICON SIZE"
+                and change the width/height values there.
+
+         To swap the logo image, replace the Base64 string
+         inside src="data:image/png;base64,…" with a new
+         Base64-encoded PNG, or change to a file path:
+           src="assets/images/my-logo.png"               -->
+    <img
+      class="logo-icon"
+      src="/Users/andres/Downloads/Spectrograms_Jungle/assets/images/Mongabay_Logomark_Dark Green_Small.png"
+      alt="Mongabay logo"
+    >
+
   </div>
 
 
-  <!-- ── TIMELINE VISUALIZER ─────────────────────────────────
-       The <canvas> element where the waveform timeline draws.
-       Do not add content inside this tag — it is painted by
-       JavaScript (script.js → redrawTimeline).
-
-       TWEAK: Height of the canvas strip → style.css
-              #timeline-canvas { height: … }                  -->
+  <!-- ── SPECTROGRAM CANVAS ───────────────────────────────────
+       Filled by script.js with the pre-computed spectrogram.
+       TWEAK: Canvas height → style.css  #timeline-canvas
+       TWEAK: Canvas corner rounding → style.css border-radius  -->
   <div class="visualizer-wrap">
     <canvas id="timeline-canvas"></canvas>
   </div>
 
 
-  <!-- ── SOUND SELECTION BUTTONS ─────────────────────────────
-       Three cards, one per audio track. Each button needs:
-         id="btn-{key}"          — unique ID (any string)
-         data-audio="{key}"      — must match a key in the
-                                   AUDIO object in script.js
-         onclick="selectSound(this)" — do not change this
-
-       TWEAK: Reorder the buttons by swapping the <button>
-              blocks below.
-       TWEAK: Add a fourth button by copying one block,
-              giving it a new id + data-audio, adding a
-              matching entry to AUDIO in script.js, and
-              placing the image/audio files in assets/.      -->
+  <!-- ── SOUND SELECTION BUTTONS ──────────────────────────────
+       TWEAK: Edit btn-name text to rename a sound.
+       TWEAK: Change data-audio="key" + matching AUDIO entry in
+              script.js to swap a track.
+       TWEAK: Change img src to swap the cover image.          -->
   <div class="sound-buttons">
 
-    <!-- ── Button 1: Chainsaw ──────────────────────────────
-         TWEAK: src → path to the spectrogram image
-         TWEAK: alt → accessible description of the image
-         TWEAK: btn-name text → label shown below the image  -->
-    <button
-      class="sound-btn"
-      id="btn-chainsaw"
-      data-audio="chainsaw"
-      onclick="selectSound(this)"
-    >
-      <img src="assets/images/chainsaw.jpg" alt="Chainsaw spectrogram">
+    <!-- Button 1: Chainsaw -->
+    <button class="sound-btn" id="btn-chainsaw" data-audio="chainsaw" onclick="selectSound(this)">
+      <img src="assets/images/chainsaw.svg" alt="Chainsaw spectrogram">
       <div class="btn-label">
         <span class="btn-name">Chainsaw</span>
-        <!-- Play / Stop icon — toggled by JS via .active class.
-             Do not edit the SVG paths unless changing the icon shape. -->
         <div class="play-icon">
           <svg viewBox="0 0 24 24">
             <polygon class="play-triangle" points="6,4 20,12 6,20"/>
@@ -98,15 +92,9 @@
       </div>
     </button>
 
-    <!-- ── Button 2: Gunshot ───────────────────────────────
-         TWEAK: Same attributes as Button 1 above.           -->
-    <button
-      class="sound-btn"
-      id="btn-gunshot"
-      data-audio="gunshot"
-      onclick="selectSound(this)"
-    >
-      <img src="assets/images/gunshot.jpg" alt="Gunshot spectrogram">
+    <!-- Button 2: Gunshot -->
+    <button class="sound-btn" id="btn-gunshot" data-audio="gunshot" onclick="selectSound(this)">
+      <img src="assets/images/gunshot.svg" alt="Gunshot spectrogram">
       <div class="btn-label">
         <span class="btn-name">Gunshot</span>
         <div class="play-icon">
@@ -121,17 +109,11 @@
       </div>
     </button>
 
-    <!-- ── Button 3: Leopard ───────────────────────────────
-         TWEAK: Same attributes as Button 1 above.           -->
-    <button
-      class="sound-btn"
-      id="btn-jaguar"
-      data-audio="jaguar"
-      onclick="selectSound(this)"
-    >
-      <img src="assets/images/jaguar.jpg" alt="Leopard spectrogram">
+    <!-- Button 3: Jaguar -->
+    <button class="sound-btn" id="btn-jaguar" data-audio="jaguar" onclick="selectSound(this)">
+      <img src="assets/images/jaguar.svg" alt="Jaguar spectrogram">
       <div class="btn-label">
-        <span class="btn-name">Leopard</span>
+        <span class="btn-name">Jaguar</span>
         <div class="play-icon">
           <svg viewBox="0 0 24 24">
             <polygon class="play-triangle" points="6,4 20,12 6,20"/>
@@ -147,20 +129,18 @@
   </div><!-- end .sound-buttons -->
 
 
-  <!-- ── SOURCES FOOTER ───────────────────────────────────────
-       Attribution text at the bottom-left of the page.
-       TWEAK: Edit the text inside .sources directly here.
-       Font size and color → style.css under .sources          -->
+  <!-- ── SOURCES FOOTER ────────────────────────────────────────
+       TWEAK: Edit attribution text here.
+       TWEAK: Font size/color → style.css  .sources            -->
   <div class="footer">
     <div class="sources">
-      Sources: Chainsaw sound recorded in an Indonesian rainforest
+      Sources: Chainsaw sound recorded in Indonesian
       by Junaydy Michael Angelo Ginting; AK47 gunshot recorded in
-      a Central African rainforest by Anahita Verahrami; Male
-      leopard vocalization was recorded by Rony Garcia in Guatemala.
+      Central Africa by Anahita Verahrami; Male
+      jaguar vocalization recorded in Guatemala by Rony Garcia.
     </div>
   </div>
 
-  <!-- Main script — load last so the DOM is ready -->
   <script src="script.js"></script>
 
 </body>
