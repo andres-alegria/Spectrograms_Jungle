@@ -16,7 +16,7 @@ html, body { width: 100%; height: 100%; }
    TWEAK: padding — space between content and page edges       */
 body {
   background: #fafafa;
-  width: 675px;
+  width: 800px;
   height: 540px;
   max-width: 100%;
   display: flex;
