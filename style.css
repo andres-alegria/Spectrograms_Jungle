@@ -230,7 +230,7 @@ body {
   .title    { font-size: 18pt; }    /* TWEAK: title size on small screens    */
   .subtitle { font-size: 9pt;  }    /* TWEAK: subtitle size on small screens */
   .logo-icon { width: 26px; height: 26px; } /* TWEAK: logo size on small screens */
-  .sound-buttons { flex-direction: column; align-items: stretch; flex: none; }
+  .sound-buttons { flex-direction: column; align-items: stretch; flex: auto; }
   .sound-btn { width: 100%; }
   .sources  { font-size: 7pt; }     /* TWEAK: sources size on small screens  */
 }
